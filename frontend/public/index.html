@@ -1,7 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="utf-8" />
+    <!--
+      Content-Security-Policy and Referrer-Policy are also delivered as HTTP headers
+      (see src/setupProxy.js and deploy/nginx.conf). The meta tags are a fallback for
+      hosts that cannot set headers; frame-ancestors, HSTS and X-Frame-Options only
+      work as HTTP headers.
+    -->
+    <meta http-equiv="Content-Security-Policy" content="%REACT_APP_CSP%" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
