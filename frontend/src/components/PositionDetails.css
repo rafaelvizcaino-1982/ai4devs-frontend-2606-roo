@@ -1,0 +1,244 @@
+.position-page {
+    --page-bg: #d5d5da;
+    --stage-bg: #f2f2f5;
+    --card-bg: #ffffff;
+    --text-color: #111111;
+    --muted-text: #4a4a4f;
+    --focus-ring: #0b57d0;
+    --score-dot: #22a51c;
+    --score-dot-border: #136b0f;
+
+    box-sizing: border-box;
+    min-height: 100vh;
+    padding: 1.5rem 1rem 3rem;
+    background-color: var(--page-bg);
+    color: var(--text-color);
+}
+
+.position-page *,
+.position-page *::before,
+.position-page *::after {
+    box-sizing: inherit;
+}
+
+.position-header,
+.stage-board,
+.position-status {
+    max-width: 70rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.position-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.position-back {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    color: var(--text-color);
+}
+
+.position-back:hover {
+    color: var(--text-color);
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.position-back:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
+.position-title {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.3;
+    min-height: 1.3em;
+}
+
+.position-title-placeholder {
+    color: var(--muted-text);
+    font-weight: 400;
+}
+
+.position-status {
+    margin-top: 0;
+    font-size: 1rem;
+}
+
+.position-status-error {
+    padding: 0.75rem 1rem;
+    border-left: 4px solid #b3261e;
+    border-radius: 0.25rem;
+    background-color: var(--card-bg);
+    color: #8c1d18;
+}
+
+.stage-board {
+    display: flex;
+    gap: 1rem;
+}
+
+.stage-column {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 11.5rem;
+    padding: 1rem 0.75rem;
+    border-radius: 0.5rem;
+    background-color: var(--stage-bg);
+}
+
+.stage-title {
+    margin: 0 0 0.75rem;
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+}
+
+.candidate-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.candidate-card {
+    padding: 0.875rem 0.75rem;
+    border-radius: 0.375rem;
+    background-color: var(--card-bg);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.candidate-name {
+    display: block;
+    margin: 0 0 0.25rem;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.score-dots {
+    display: flex;
+    gap: 1px;
+    min-height: 1rem;
+}
+
+.score-dot {
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid var(--score-dot-border);
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #8be86f 0%, var(--score-dot) 55%, #158a10 100%);
+}
+
+/* Drag and drop */
+.stage-column--over {
+    outline: 3px dashed var(--focus-ring);
+    outline-offset: -3px;
+}
+
+.candidate-card {
+    position: relative;
+    cursor: grab;
+    touch-action: manipulation;
+    user-select: none;
+}
+
+.candidate-card:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
+.candidate-card--dragging {
+    z-index: 10;
+    cursor: grabbing;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.candidate-card--saving {
+    cursor: progress;
+    opacity: 0.7;
+}
+
+.position-toast-region {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    left: 1rem;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.position-toast {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 40rem;
+    padding: 0.75rem 1rem;
+    border-left: 4px solid #b3261e;
+    border-radius: 0.375rem;
+    background-color: var(--card-bg);
+    color: #8c1d18;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    pointer-events: auto;
+}
+
+.position-toast p {
+    margin: 0;
+}
+
+.position-toast button {
+    flex: none;
+    min-height: 2.75rem;
+    padding: 0 1rem;
+    border: 1px solid #8c1d18;
+    border-radius: 0.375rem;
+    background: transparent;
+    color: #8c1d18;
+}
+
+.position-toast button:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .candidate-card:not(.candidate-card--dragging) {
+        transition: box-shadow 150ms ease;
+    }
+}
+
+/* Mobile: stages stacked vertically, full width */
+@media (max-width: 767.98px) {
+    .stage-board {
+        flex-direction: column;
+    }
+
+    .stage-column {
+        flex: none;
+        width: 100%;
+        min-height: 0;
+    }
+}
+
+@media (forced-colors: active) {
+    .score-dot {
+        background: CanvasText;
+        forced-color-adjust: none;
+    }
+}
